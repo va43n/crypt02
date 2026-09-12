@@ -11,7 +11,19 @@ int parse_task1_input(char* buffer, size_t buffer_size, int* mode,
   int n = sscanf(buffer, "%s %s %s %s", string_mode, file_name, string_power,
                  user_data);
 
-  if (strcmp(string_mode, XOR_GEN_OPTION) == 0) {
+  if (strcmp(string_mode, XOR_ENCRYPT_OPTION) == 0) {
+    *mode = XOR_ENCRYPT_OPTION_NUMBER;
+
+    if (n != 1) {
+      printf(
+          "ERROR: parse_task1_input - With encrypt mode there should be "
+          "only one "
+          "parameter - '1'.\n");
+      return FAILURE;
+    }
+
+    return SUCCESS;
+  } else if (strcmp(string_mode, XOR_GEN_OPTION) == 0) {
     *mode = XOR_GEN_OPTION_NUMBER;
     if (n != 2) {
       printf(
@@ -48,7 +60,9 @@ int parse_task1_input(char* buffer, size_t buffer_size, int* mode,
   }
 
   if (strcmp(file_name, MESSAGE_FILE) != 0 &&
-      strcmp(file_name, CIPHER_FILE) != 0 && strcmp(file_name, KEY_FILE) != 0) {
+      strcmp(file_name, CIPHER_FILE) != 0 && strcmp(file_name, KEY_FILE) != 0 &&
+      (*mode == XOR_SHOW_OPTION_NUMBER &&
+       strcmp(file_name, XOR_SHOW_ALL) != 0)) {
     printf("ERROR: parse_task1_input - wrong file name.\n");
     return FAILURE;
   }

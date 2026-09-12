@@ -24,3 +24,5 @@ int create_files_if_needed(void) {
 
   return SUCCESS;
 }
+
+void init_random(void) { srand(time(NULL)); }

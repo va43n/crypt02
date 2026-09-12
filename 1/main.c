@@ -3,6 +3,7 @@
 int main(void) {
   setvbuf(stdout, NULL, _IONBF, 0);
 
+  init_random();
   if (create_files_if_needed() == FAILURE) return EXIT_FAILURE;
 
   char buffer[BUFFER_SIZE];

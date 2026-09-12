@@ -4,7 +4,7 @@ void print_file_in_binary(char* buffer, size_t buffer_size) {
   unsigned int number_of_bits_in_char = sizeof(char) * 8;
   for (size_t i = 0; i < buffer_size; i++) {
     for (int j = number_of_bits_in_char - 1; j >= 0; j--)
-      printf("%d", buffer[i] >> j & 1);
+      printf("%d", (unsigned int)(unsigned char)buffer[i] >> j & 1);
     printf(" ");
   }
   printf("\n");
@@ -12,7 +12,7 @@ void print_file_in_binary(char* buffer, size_t buffer_size) {
 
 void print_file_in_hex(char* buffer, size_t buffer_size) {
   for (size_t i = 0; i < buffer_size; i++) {
-    printf("%x ", buffer[i]);
+    printf("%x ", (unsigned int)(unsigned char)buffer[i]);
   }
   printf("\n");
 }
