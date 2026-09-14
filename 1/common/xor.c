@@ -1,11 +1,9 @@
 #include "../lab1.h"
 
-void calculate_xor(char* message, char* key, char* cipher) {
-  size_t m_len = strlen(message);
-  size_t k_len = strlen(key);
-
-  for (size_t i = 0; i < m_len; i++) {
-    if (i < k_len)
+void calculate_xor(char* message, size_t message_size, char* key,
+                   size_t key_size, char* cipher) {
+  for (size_t i = 0; i < message_size; i++) {
+    if (i < key_size)
       cipher[i] = message[i] ^ key[i];
     else
       cipher[i] = message[i];

@@ -28,9 +28,11 @@ int main(void) {
         LFSR_ENCRYPTION_MENU;
         if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
         if (perform_task1_lfsr(buffer, BUFFER_SIZE) == FAILURE) continue;
-      } else if (mode == BACK_EXIT_OPTION_NUMBER)
-        continue;
-      else {
+      } else if (mode == BACK_EXIT_OPTION_NUMBER) {
+        DECRYPTION_MENU;
+        if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
+        if (perform_task2(buffer, BUFFER_SIZE) == FAILURE) continue;
+      } else {
         printf("ERROR: mode is not found.\n");
         continue;
       }

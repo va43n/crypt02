@@ -33,7 +33,8 @@ int convert_hex_to_symbol(char* hex, size_t buffer_size, char* symbols,
                           size_t* symbols_size);
 
 // common/xor.c
-void calculate_xor(char* message, char* key, char* cipher);
+void calculate_xor(char* message, size_t message_size, char* key,
+                   size_t key_size, char* cipher);
 
 // task1/parse_task1_xor_input.c
 int parse_task1_xor_input(char* buffer, size_t buffer_size, int* mode,
@@ -47,4 +48,9 @@ int parse_task1_lfsr_input(char* buffer, size_t buffer_size, int* mode,
 int perform_task1_xor(char* buffer, size_t buffer_size);
 
 // task1/perform_task1_lfsr.c
+void generate_key_with_lfsr(char* key_buffer, size_t key_len,
+                            unsigned char initial_value);
 int perform_task1_lfsr(char* buffer, size_t buffer_size);
+
+// task2/perform_task2.c
+int perform_task2(char* buffer, size_t buffer_size);

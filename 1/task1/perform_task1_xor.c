@@ -34,16 +34,16 @@ static int xor_encrypt(void) {
   int fd_m = open(MESSAGE_FILE, O_RDONLY);
   int fd_k = open(KEY_FILE, O_RDONLY);
 
-  ssize_t bytes = read(fd_m, message, BUFFER_SIZE);
-  read(fd_k, key, BUFFER_SIZE);
+  ssize_t m_bytes = read(fd_m, message, BUFFER_SIZE);
+  ssize_t k_bytes = read(fd_k, key, BUFFER_SIZE);
 
   close(fd_m);
   close(fd_k);
 
-  calculate_xor(message, key, cipher);
+  calculate_xor(message, m_bytes, key, k_bytes, cipher);
 
   int fd_c = open(CIPHER_FILE, O_WRONLY | O_TRUNC);
-  write(fd_c, cipher, bytes);
+  write(fd_c, cipher, m_bytes);
   close(fd_c);
 
   return SUCCESS;
@@ -77,8 +77,7 @@ static int xor_show(char* file_name, int power) {
     char buffer[BUFFER_SIZE];
     memset(buffer, 0, BUFFER_SIZE);
 
-    read(fd, buffer, BUFFER_SIZE);
-    size_t len = strlen(buffer);
+    ssize_t len = read(fd, buffer, BUFFER_SIZE);
 
     printf("\n====== %s ======\n", file_names[i]);
     if (power == 2)

@@ -29,6 +29,20 @@ int perform_task1_lfsr(char* buffer, size_t buffer_size) {
   return SUCCESS;
 }
 
+void generate_key_with_lfsr(char* key_buffer, size_t key_len,
+                            unsigned char initial_value) {
+  for (size_t i = 0; i < key_len; i++) {
+    unsigned char temp = 0;
+
+    for (int j = 0; j < 8; j++) {
+      int bit = generate_lfsr_bit(&initial_value);
+      temp |= (bit << j);
+    }
+
+    key_buffer[i] = temp;
+  }
+}
+
 static int generate_lfsr_bit(unsigned char* initial_value) {
   int all_polinomes[] = LFSR_ALL_LFSRS;
   int polinome = all_polinomes[current_lfsr_number];
@@ -58,25 +72,12 @@ static int lfsr_encrypt(void) {
   close(fd_m);
   close(fd_i);
 
-  size_t message_len = strlen(message);
   unsigned char actual_init_value = (unsigned char)initial_value[0];
 
-  for (size_t i = 0; i < message_len; i++) {
-    unsigned char temp = 0;
-
-    for (int j = 0; j < 8; j++) {
-      int bit = generate_lfsr_bit(&actual_init_value);
-      temp |= (bit << j);
-
-      printf("generated: %d\n", bit);
-    }
-
-    key[i] = temp;
-  }
-
+  generate_key_with_lfsr(key, bytes, actual_init_value);
   printf("result key: %s\n", key);
 
-  calculate_xor(message, key, cipher);
+  calculate_xor(message, bytes, key, bytes, cipher);
 
   int fd_c = open(CIPHER_FILE, O_WRONLY | O_TRUNC);
   write(fd_c, cipher, bytes);
@@ -102,18 +103,17 @@ static int lfsr_show(char* file_name, int power) {
   char buffer[BUFFER_SIZE];
   memset(buffer, 0, BUFFER_SIZE);
 
-  read(fd, buffer, BUFFER_SIZE);
-  size_t len = strlen(buffer);
+  ssize_t bytes = read(fd, buffer, BUFFER_SIZE);
 
   printf("\n====== %s ======\n", file_name);
   if (power == 2)
-    print_file_in_binary(buffer, len);
+    print_file_in_binary(buffer, bytes);
   else if (power == 16)
-    print_file_in_hex(buffer, len);
+    print_file_in_hex(buffer, bytes);
   else if (power == 10)
-    print_file_in_dec(buffer, len);
+    print_file_in_dec(buffer, bytes);
   else if (power == 0)
-    print_file_in_symbol(buffer, len);
+    print_file_in_symbol(buffer, bytes);
   printf("====== %s ======\n", file_name);
 
   close(fd);

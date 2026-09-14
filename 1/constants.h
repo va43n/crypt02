@@ -115,3 +115,11 @@
         LFSR_1_NUMBER, LFSR_2_NUMBER, LFSR_1, LFSR_2, current_lfsr_number,     \
         BACK_EXIT_OPTION);                                                     \
   } while (0)
+
+#define DECRYPTION_MENU                                                      \
+  do {                                                                       \
+    printf(                                                                  \
+        "\n\nChoose a mode:\n\t(%s) Decrypt with XOR;\n\t(%s) Decrypt with " \
+        "LFSR;\n\t(%s) Back.\n> ",                                           \
+        XOR_ENCRYPT_OPTION, LFSR_ENCRYPT_OPTION, BACK_EXIT_OPTION);          \
+  } while (0)
