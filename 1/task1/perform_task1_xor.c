@@ -5,15 +5,16 @@ static int xor_gen(char* file_name);
 static int xor_show(char* file_name, int power);
 static int xor_write(char* file_name, char* text, int power);
 
-int perform_task1(char* buffer, size_t buffer_size) {
+int perform_task1_xor(char* buffer, size_t buffer_size) {
+  (void)buffer_size;
+
   char file_name[BUFFER_SIZE], text[BUFFER_SIZE];
   int power, mode;
 
-  if (parse_task1_input(buffer, BUFFER_SIZE, &mode, file_name, &power, text) ==
-      FAILURE)
+  if (parse_task1_xor_input(buffer, BUFFER_SIZE, &mode, file_name, &power,
+                            text) == FAILURE)
     return FAILURE;
 
-  memset(buffer, 0, buffer_size);
   if (mode == XOR_ENCRYPT_OPTION_NUMBER) {
     if (xor_encrypt() == FAILURE) return FAILURE;
   } else if (mode == XOR_GEN_OPTION_NUMBER) {
@@ -33,17 +34,16 @@ static int xor_encrypt(void) {
   int fd_m = open(MESSAGE_FILE, O_RDONLY);
   int fd_k = open(KEY_FILE, O_RDONLY);
 
-  read(fd_m, message, BUFFER_SIZE);
+  ssize_t bytes = read(fd_m, message, BUFFER_SIZE);
   read(fd_k, key, BUFFER_SIZE);
 
   close(fd_m);
   close(fd_k);
 
   calculate_xor(message, key, cipher);
-  size_t c_len = strlen(cipher);
 
   int fd_c = open(CIPHER_FILE, O_WRONLY | O_TRUNC);
-  write(fd_c, cipher, c_len);
+  write(fd_c, cipher, bytes);
   close(fd_c);
 
   return SUCCESS;
@@ -75,6 +75,7 @@ static int xor_show(char* file_name, int power) {
     int fd = open(file_names[i], O_RDONLY);
 
     char buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
 
     read(fd, buffer, BUFFER_SIZE);
     size_t len = strlen(buffer);
