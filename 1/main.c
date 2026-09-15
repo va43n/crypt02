@@ -29,15 +29,15 @@ int main(void) {
         if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
         if (perform_task1_lfsr(buffer, BUFFER_SIZE) == FAILURE) continue;
       } else if (mode == BACK_EXIT_OPTION_NUMBER) {
-        DECRYPTION_MENU;
-        if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
-        if (perform_task2(buffer, BUFFER_SIZE) == FAILURE) continue;
+        continue;
       } else {
         printf("ERROR: mode is not found.\n");
         continue;
       }
     } else if (mode == DECRYPTION_MODE_NUMBER) {
-      printf("not done yet\n");
+      DECRYPTION_MENU;
+      if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
+      if (perform_task2(buffer, BUFFER_SIZE) == FAILURE) continue;
     } else {
       printf("ERROR: mode is not found.\n");
       continue;

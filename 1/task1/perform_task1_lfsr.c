@@ -75,7 +75,8 @@ static int lfsr_encrypt(void) {
   unsigned char actual_init_value = (unsigned char)initial_value[0];
 
   generate_key_with_lfsr(key, bytes, actual_init_value);
-  printf("result key: %s\n", key);
+  printf("result key: ");
+  print_file_in_hex(key, bytes);
 
   calculate_xor(message, bytes, key, bytes, cipher);
 
