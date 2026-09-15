@@ -44,7 +44,7 @@ void generate_key_with_lfsr(char* key_buffer, size_t key_len,
 
 int generate_lfsr_bit(unsigned char* initial_value) {
   int all_polinomes[] = LFSR_ALL_LFSRS;
-  int polinome = all_polinomes[current_lfsr_number];
+  int polinome = all_polinomes[current_lfsr_number - 1];
 
   unsigned char new_initial = *initial_value;
   unsigned char temp = 0;
