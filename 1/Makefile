@@ -1,6 +1,7 @@
 CC = gcc
 CLANG_FORMAT = clang-format
 CFLAGS = -Wall -Wextra -Werror -std=gnu11
+OTHER_FLAGS = -lm
 
 SRC = $(wildcard common/*.c) \
       $(wildcard task1/*.c) \
@@ -18,7 +19,7 @@ all: manual_testing
 	$(CC) $(CFLAGS) -c $< -o $@
 
 manual_testing: $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(MANUAL_TEST_TARGET)
+	$(CC) $(CFLAGS) $(OBJ) -o $(MANUAL_TEST_TARGET) $(OTHER_FLAGS)
 
 format:
 	$(CLANG_FORMAT) -i *.h $(SRC)
