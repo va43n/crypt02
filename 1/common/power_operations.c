@@ -11,7 +11,7 @@ void print_file_in_binary(char* buffer, size_t buffer_size) {
 
 void print_file_in_hex(char* buffer, size_t buffer_size) {
   for (size_t i = 0; i < buffer_size; i++) {
-    printf("%x", (unsigned int)(unsigned char)buffer[i]);
+    printf("%02x", (unsigned int)(unsigned char)buffer[i]);
   }
   printf("\n");
 }

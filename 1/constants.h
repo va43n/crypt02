@@ -19,15 +19,19 @@
 #define DECRYPTION_MODE "2"
 #define DECRYPTION_MODE_NUMBER 2
 
+#define EXAMINE_MODE "3"
+#define EXAMINE_MODE_NUMBER 3
+
 #define STANDARD_MENU                                                          \
   do {                                                                         \
     printf(                                                                    \
         "\n\nChoose a mode:\n\t(%s) Encrypt data from '%s' with key '%s' "     \
         "and put new message "                                                 \
         "in '%s';\n\t(%s) Decrypt data from '%s' with key '%s' and put new "   \
-        "message in '%s';\n\t(%s) Exit.\n> ",                                  \
+        "message in '%s';\n\t(%s) Examine the results of the LFSR\n\t(%s) "    \
+        "Exit.\n> ",                                                           \
         ENCRYPTION_MODE, MESSAGE_FILE, KEY_FILE, CIPHER_FILE, DECRYPTION_MODE, \
-        CIPHER_FILE, KEY_FILE, MESSAGE_FILE, BACK_EXIT_OPTION);                \
+        CIPHER_FILE, KEY_FILE, MESSAGE_FILE, EXAMINE_MODE, BACK_EXIT_OPTION);  \
   } while (0)
 
 #define BINARY "2"
@@ -88,7 +92,7 @@
 #define LFSR_1_NUMBER 1
 
 #define LFSR_2 "x^8 + x^5 + x^3 + x^2 + 1"
-#define LFSR_2_SHIFTS 0b10101101
+#define LFSR_2_SHIFTS 0b00101101
 #define LFSR_2_NUMBER 2
 
 #define LFSR_ALL_LFSRS \
@@ -122,4 +126,24 @@
         "\n\nChoose a mode:\n\t(%s) Decrypt with XOR;\n\t(%s) Decrypt with " \
         "LFSR;\n\t(%s) Back.\n> ",                                           \
         XOR_ENCRYPT_OPTION, LFSR_ENCRYPT_OPTION, BACK_EXIT_OPTION);          \
+  } while (0)
+
+#define EXAMINE_FIND_PERIOD_OPTION "1"
+#define EXAMINE_FIND_PERIOD_OPTION_NUMBER 1
+
+#define EXAMINE_CHECK_CHI_2_OPTION "2"
+#define EXAMINE_CHECK_CHI_2_OPTION_NUMBER 2
+
+#define EXAMINE_CHECK_PROPERTIES_OPTION "3"
+#define EXAMINE_CHECK_PROPERTIES_OPTION_NUMBER 3
+
+#define EXAMINE_MENU                                                           \
+  do {                                                                         \
+    printf(                                                                    \
+        "\n\nChoose a mode:\n\t(%s) Show some values of current LFSR (%d) "    \
+        "and find the period;\n\t(%s) Check if sequence is uniform with "      \
+        "chi-square;\n\t(%s) Check properties of sequence;\n\t(%s) Back.\n> ", \
+        EXAMINE_FIND_PERIOD_OPTION, current_lfsr_number,                       \
+        EXAMINE_CHECK_CHI_2_OPTION, EXAMINE_CHECK_PROPERTIES_OPTION,           \
+        BACK_EXIT_OPTION);                                                     \
   } while (0)

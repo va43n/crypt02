@@ -4,7 +4,6 @@ static int lfsr_encrypt(void);
 static int lfsr_pick(int lfsr_num);
 static int lfsr_show(char* file_name, int power);
 static int lfsr_write(char* file_name, char* text, int power);
-static int generate_lfsr_bit(unsigned char* initial_value);
 
 int perform_task1_lfsr(char* buffer, size_t buffer_size) {
   (void)buffer_size;
@@ -43,7 +42,7 @@ void generate_key_with_lfsr(char* key_buffer, size_t key_len,
   }
 }
 
-static int generate_lfsr_bit(unsigned char* initial_value) {
+int generate_lfsr_bit(unsigned char* initial_value) {
   int all_polinomes[] = LFSR_ALL_LFSRS;
   int polinome = all_polinomes[current_lfsr_number];
 

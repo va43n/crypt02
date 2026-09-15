@@ -51,6 +51,10 @@ int perform_task1_xor(char* buffer, size_t buffer_size);
 void generate_key_with_lfsr(char* key_buffer, size_t key_len,
                             unsigned char initial_value);
 int perform_task1_lfsr(char* buffer, size_t buffer_size);
+int generate_lfsr_bit(unsigned char* initial_value);
 
 // task2/perform_task2.c
 int perform_task2(char* buffer, size_t buffer_size);
+
+// task3/perform_task3.c
+int perform_task3(char* buffer, size_t buffer_size);

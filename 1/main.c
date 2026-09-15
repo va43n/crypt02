@@ -38,6 +38,10 @@ int main(void) {
       DECRYPTION_MENU;
       if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
       if (perform_task2(buffer, BUFFER_SIZE) == FAILURE) continue;
+    } else if (mode == EXAMINE_MODE_NUMBER) {
+      EXAMINE_MENU;
+      if (get_user_input(buffer, BUFFER_SIZE) == FAILURE) return FAILURE;
+      if (perform_task3(buffer, BUFFER_SIZE) == FAILURE) continue;
     } else {
       printf("ERROR: mode is not found.\n");
       continue;
