@@ -55,7 +55,7 @@ dkms.conf
 *.dwo
 
 # labs
-*.odt*
+*.odt#
 
 # lab1
 *.txt
