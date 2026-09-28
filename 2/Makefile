@@ -36,10 +36,12 @@ valgrind: manual_testing
 
 clean:
 	@rm -rf $(OBJ) \
-			$(MANUAL_TEST_TARGET) \
 			*.o \
 			$(TEXT_FILES) \
 			*.csv
+
+fclean: clean
+	@rm -rf $(MANUAL_TEST_TARGET)
 
 .PHONY: all \
 		manual_testing \
